@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+h1,p, form{
+    text-align: center;
+    margin: 20px;
+}
+
+label, input, button {
+    display: block;
+    margin: 15px 0;
+}
+
+input {
+    margin-left: 33%;
+}
+
+button {
+    margin-left: 40%;
+    width: 100px;
+    height: 25px;
+    background-color: goldenrod;
+}
+
+form {
+    background-color: black;
+    color: goldenrod;
+    width: 450px;
+    border-radius: 5%;
+}
+
+.card {
+    width: 250px;
+    height: 250px;
+    padding: 20px;
+}
+
+.bg-success {
+    background-color: green;
+    color: white;
+}
+
+.bg-danger {
+    background-color: red;
+    color: white;
+}
+
+
+
