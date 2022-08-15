@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.first_name}}'s Coding Dojo Wall</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="nav m-3 d-flex justify-content-between  pb-3 border-bottom border-dark">
+            <div>
+                <h1>Coding Dojo Wall</h1>
+            </div>
+            <div class="d-flex align-items-center">
+                <h1 class="mx-5">Welcome, {{user.first_name}}</h1>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around mt-4">
+            <div class="col-5 bg-dark text-light p-2">
+                <h2 class="text-center text-warning mb-3">{{messages|length}} Message(s) for You</h2>
+                {% for message in messages %}
+                <div class="card my-2">
+                    <div class="card-body">
+                        <h3 class="card-title text-dark">{{message.sender}} said {{message.time_span()}}</h3>
+                        <p class="card-text text-dark">{{message.content}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/destroy/{{message.id}}" class="btn btn-danger mt-3">Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-5 bg-dark text-light p-2">
+                <h2 class="text-center">Send a Message: </h2>
+                {% for u in users %}
+                    {% if u.id != session.user_id %}
+                <form action="/send_message" method="post" class="p-2">
+                    <input type="hidden" name="sender_id" value={{session.user_id}}>
+                    <input type="hidden" name="receiver_id" value={{u.id}}>
+                    <label for="receiver_id" class="mb-2">Message {{u.first_name}}:</label>
+                    <textarea class="form-control" name="content" id="" cols="30" rows="3"></textarea>
+                    <input type="submit" value="Message" class="btn btn-warning mt-3">
+                </form>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+</body>
+</html>
